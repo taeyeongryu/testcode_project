@@ -22,4 +22,9 @@ public class OrderProduct extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
+
+    public OrderProduct(Order order, Product product) {
+        this.order = order;
+        this.product = product;
+    }
 }
