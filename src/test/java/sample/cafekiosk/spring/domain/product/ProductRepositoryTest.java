@@ -16,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static sample.cafekiosk.spring.domain.product.ProductSellingStatus.*;
 import static sample.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
-@SpringBootTest
+//@SpringBootTest
 //좀 더 가볍다 jpa관련 Bean들만 띄워서 테스트
-//@DataJpaTest
+@DataJpaTest
 @ActiveProfiles("test")
 class ProductRepositoryTest {
     @Autowired
