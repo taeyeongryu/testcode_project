@@ -7,6 +7,7 @@ import sample.cafekiosk.spring.domain.product.ProductSellingStatus;
 import sample.cafekiosk.spring.domain.product.ProductType;
 
 import javax.persistence.*;
+
 @Getter
 public class ProductResponse {
 
@@ -28,8 +29,6 @@ public class ProductResponse {
     }
 
     @Builder
-
-
     public static ProductResponse of(Product product) {
         return ProductResponse.builder()
                 .id(product.getId())
