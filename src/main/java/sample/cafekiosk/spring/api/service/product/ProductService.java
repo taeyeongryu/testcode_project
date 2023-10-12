@@ -26,17 +26,17 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    //동시성 이슈 발생 가능
     public ProductResponse createProduct(ProductCreateRequest request) {
         //nextProductNumber
         String nextProductNumber = nextProductNumber();
 
-        return ProductResponse.builder()
-                .productNumber(nextProductNumber)
-                .type(request.getType())
-                .sellingStatus(request.getSellingStatus())
-                .name(request.getName())
-                .price(request.getPrice())
-                .build();
+        Product product=request.toEntity(nextProductNumber);
+
+        Product savedProduct = productRepository.save(product);
+
+
+        return ProductResponse.of(savedProduct);
     }
 
     private String nextProductNumber() {
