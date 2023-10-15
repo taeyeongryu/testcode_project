@@ -2,6 +2,8 @@ package sample.cafekiosk.spring.api.controller.product;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import sample.cafekiosk.ControllersTestSupport;
 import sample.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
 import sample.cafekiosk.spring.api.service.product.ProductService;
 import sample.cafekiosk.spring.api.service.product.response.ProductResponse;
@@ -24,17 +27,22 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-@WebMvcTest(controllers = ProductController.class)
-class ProductControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+class ProductControllerTest extends ControllersTestSupport {
 
-    @Autowired
-    private ObjectMapper objectMapper;
+    @BeforeAll
+    static void beforeAll() {
 
-    @MockBean
-    private ProductService productService;
+    }
+
+    @BeforeEach
+    void setUp() {
+        // before method
+
+        //아래와 같은 내용을 만족했을 때에 사용한다.
+        //각 테스트 입장에서 봤을 때 : 아예 몰라도 테스트 내용을 이해하는데 문제가 없는가?
+        //수정해도 모든 테스트에 영향을 주지 않는가?
+    }
 
     @DisplayName("신규 상품을 등록한다.")
     @Test
