@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductNumberFactory productNumberFactory;
 
     public List<ProductResponse> getSellingProducts() {
         List<Product> products = productRepository.findAllBySellingStatusIn(ProductSellingStatus.forDisplay());
@@ -30,7 +31,7 @@ public class ProductService {
     //동시성 이슈 발생 가능
     public ProductResponse createProduct(ProductCreateServiceRequest request) {
         //nextProductNumber
-        String nextProductNumber = nextProductNumber();
+        String nextProductNumber = productNumberFactory.nextProductNumber();
 
         Product product=request.toEntity(nextProductNumber);
 
@@ -40,14 +41,5 @@ public class ProductService {
         return ProductResponse.of(savedProduct);
     }
 
-    private String nextProductNumber() {
-        String latestProductNumber = productRepository.findLatestProductNumber();
-        if (latestProductNumber == null) {
-            return "001";
-        }
-        int latestProductNumberInt = Integer.parseInt(latestProductNumber) ;
-        int nextProductNumberInt = latestProductNumberInt + 1;
 
-        return String.format("%03d", nextProductNumberInt);
-    }
 }
